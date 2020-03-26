@@ -1,0 +1,54 @@
+{
+    "name": "suavy/database-reset-command-for-laravel",
+    "description": "",
+    "keywords": [
+        "suavy",
+        "database-reset-command-for-laravel"
+    ],
+    "homepage": "https://github.com/suavy/database-reset-command-for-laravel",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Suavy",
+            "email": "cdo_outeiro@me.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "illuminate/support": "^6.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Suavy\\DatabaseResetCommandForLaravel\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Suavy\\DatabaseResetCommandForLaravel\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Suavy\\DatabaseResetCommandForLaravel\\DatabaseResetCommandForLaravelServiceProvider"
+            ],
+            "aliases": {
+                "DatabaseResetCommandForLaravel": "Suavy\\DatabaseResetCommandForLaravel\\DatabaseResetCommandForLaravelFacade"
+            }
+        }
+    }
+}
