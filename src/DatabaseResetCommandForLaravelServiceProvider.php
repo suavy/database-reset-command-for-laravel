@@ -3,6 +3,7 @@
 namespace Suavy\DatabaseResetCommandForLaravel;
 
 use Illuminate\Support\ServiceProvider;
+use Suavy\DatabaseResetCommandForLaravel\app\Console\Commands\DatabaseReset;
 
 class DatabaseResetCommandForLaravelServiceProvider extends ServiceProvider
 {
@@ -20,9 +21,9 @@ class DatabaseResetCommandForLaravelServiceProvider extends ServiceProvider
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         if ($this->app->runningInConsole()) {
-            $this->publishes([
+            /*$this->publishes([
                 __DIR__.'/../config/config.php' => config_path('database-reset-command-for-laravel.php'),
-            ], 'config');
+            ], 'config');*/
 
             // Publishing the views.
             /*$this->publishes([
@@ -40,7 +41,9 @@ class DatabaseResetCommandForLaravelServiceProvider extends ServiceProvider
             ], 'lang');*/
 
             // Registering package commands.
-            // $this->commands([]);
+            $this->commands([
+                DatabaseReset::class,
+            ]);
         }
     }
 
