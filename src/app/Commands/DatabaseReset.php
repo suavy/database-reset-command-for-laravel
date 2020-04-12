@@ -5,10 +5,9 @@ namespace Suavy\DatabaseResetCommandForLaravel\app\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
-class DatabaseReset extends Command {
-
+class DatabaseReset extends Command
+{
     protected $signature = 'db:reset
                             {--F|force : Command will launch with no warning and no production protection}';
 
@@ -26,11 +25,12 @@ class DatabaseReset extends Command {
         $this->databaseUsername = env('DB_USERNAME');
     }
 
-    public function handle() {
+    public function handle()
+    {
         $force = $this->option('force');
-        if($force || ((env('APP_ENV') != 'prod') && (env('APP_ENV') != 'production'))) {
+        if ($force || ((env('APP_ENV') != 'prod') && (env('APP_ENV') != 'production'))) {
             $this->warn('This command import the file "db.sql" (if exist) and launch migrations. All recent data will be deleted.');
-            if($force || $this->confirm('Are you sure ?')) {
+            if ($force || $this->confirm('Are you sure ?')) {
                 $this->resetDatabase();
             }
         } else {
@@ -39,7 +39,8 @@ class DatabaseReset extends Command {
         }
     }
 
-    public function resetDatabase() {
+    public function resetDatabase()
+    {
         $this->info('Dropping database...');
         exec("mysql --user=$this->databaseUsername --password=$this->databasePassword -e 'DROP DATABASE $this->databaseName;'");
         $this->info('Database dropped');
@@ -54,5 +55,4 @@ class DatabaseReset extends Command {
         $this->info(Artisan::output());
         $this->info('Database migrated');
     }
-
 }

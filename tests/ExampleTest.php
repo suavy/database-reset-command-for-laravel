@@ -7,12 +7,11 @@ use Suavy\DatabaseResetCommandForLaravel\DatabaseResetCommandForLaravelServicePr
 
 class ExampleTest extends TestCase
 {
-
     protected function getPackageProviders($app)
     {
         return [DatabaseResetCommandForLaravelServiceProvider::class];
     }
-    
+
     /** @test */
     public function true_is_true()
     {
