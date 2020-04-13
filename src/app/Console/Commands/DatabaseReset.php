@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\DB;
 class DatabaseReset extends Command
 {
     protected $signature = 'db:reset
-                            {--F|force : Command will launch with no warning and no production protection}';
+                            {--F|force : Launch with no warning and no production protection}
+                            {--I|import : Import db.sql file located at root of your project}';
 
     protected $description = 'Import database & migrate';
 
@@ -29,13 +30,14 @@ class DatabaseReset extends Command
     {
         $force = $this->option('force');
         if ($force || ((env('APP_ENV') != 'prod') && (env('APP_ENV') != 'production'))) {
-            $this->warn('This command import the file "db.sql" (if exist) and launch migrations. All recent data will be deleted.');
+            $this->warn('Your database will be reset and migrations launched.');
+            $this->warn('Be careful, all recent data will be deleted!');
             if ($force || $this->confirm('Are you sure ?')) {
                 $this->resetDatabase();
             }
         } else {
-            $this->alert('This command can\'t be used on production.');
-            $this->alert('If you still want to use it, use option --force (--F shortcut).');
+            $this->alert('This command can\'t be used on production');
+            $this->alert('If you still want to use it, use option --force (or --F)');
         }
     }
 
@@ -43,16 +45,14 @@ class DatabaseReset extends Command
     {
         $this->info('Dropping database...');
         exec("mysql --user=$this->databaseUsername --password=$this->databasePassword -e 'DROP DATABASE $this->databaseName;'");
-        $this->info('Database dropped');
         $this->info('Creating database...');
         exec("mysql --user=$this->databaseUsername --password=$this->databasePassword -e 'CREATE DATABASE $this->databaseName;'");
-        $this->info('Database created');
-        //$this->info('Importing database...');
-        //exec("mysql --user=$databaseUsername --password=$databasePassword $databaseName < db.sql");
-        //$this->info('Database imported');
+        if($this->option('import')) {
+            $this->info('Importing database...');
+            exec("mysql --user=$this->databaseUsername --password=$this->databasePassword $this->databaseName < db.sql");
+        }
         $this->info('Migrating database...');
         Artisan::call('migrate');
         $this->info(Artisan::output());
-        $this->info('Database migrated');
     }
 }
