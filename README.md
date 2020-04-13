@@ -35,7 +35,7 @@ php artisan db:reset --import
 
 ## Contributing
 
-todo
+Contributions are **welcome** and will be fully **credited**.
 
 ### Security
 
