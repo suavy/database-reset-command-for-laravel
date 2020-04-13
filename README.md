@@ -22,12 +22,12 @@ composer require suavy/database-reset-command-for-laravel
 php artisan db:reset
 ```
 ### Options
-#### --force (or --F)
+#### --force
 Launch with no warning and no production protection
 ``` bash
 php artisan db:reset --force
 ```
-#### --import (or --I)
+#### --import
 Import db.sql file located at root of your project (be sure to not commit this file, add it to your .gitignore)
 ``` bash
 php artisan db:reset --import
@@ -35,7 +35,7 @@ php artisan db:reset --import
 
 ## Contributing
 
-todo
+Contributions are **welcome** and will be fully **credited**.
 
 ### Security
 
