@@ -1,11 +1,12 @@
-# Very short description of the package
+# Database Reset Command for Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/suavy/database-reset-command-for-laravel.svg?style=flat-square)](https://packagist.org/packages/suavy/database-reset-command-for-laravel)
 [![Build Status](https://img.shields.io/travis/suavy/database-reset-command-for-laravel/master.svg?style=flat-square)](https://travis-ci.org/suavy/database-reset-command-for-laravel)
 [![Quality Score](https://img.shields.io/scrutinizer/g/suavy/database-reset-command-for-laravel.svg?style=flat-square)](https://scrutinizer-ci.com/g/suavy/database-reset-command-for-laravel)
 [![Total Downloads](https://img.shields.io/packagist/dt/suavy/database-reset-command-for-laravel.svg?style=flat-square)](https://packagist.org/packages/suavy/database-reset-command-for-laravel)
+[![StyleCI](https://github.styleci.io/repos/250306786/shield?branch=master)](https://github.styleci.io/repos/250306786)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+This package reset your database in few steps : dropping, creating, importing (optional), migrating.
 
 ## Installation
 
@@ -20,10 +21,21 @@ composer require suavy/database-reset-command-for-laravel
 ``` bash
 php artisan db:reset
 ```
+### Options
+#### --force (or --F)
+Launch with no warning and no production protection
+``` bash
+php artisan db:reset --force
+```
+#### --import (or --I)
+Import db.sql file located at root of your project (be sure to not commit this file, add it to your .gitignore)
+``` bash
+php artisan db:reset --import
+```
 
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+todo
 
 ### Security
 
