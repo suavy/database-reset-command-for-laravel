@@ -4,7 +4,6 @@ namespace Suavy\DatabaseResetCommandForLaravel\app\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\DB;
 
 class DatabaseReset extends Command
 {
@@ -47,7 +46,7 @@ class DatabaseReset extends Command
         exec("mysql --user=$this->databaseUsername --password=$this->databasePassword -e 'DROP DATABASE $this->databaseName;'");
         $this->info('Creating database...');
         exec("mysql --user=$this->databaseUsername --password=$this->databasePassword -e 'CREATE DATABASE $this->databaseName;'");
-        if($this->option('import')) {
+        if ($this->option('import')) {
             $this->info('Importing database...');
             exec("mysql --user=$this->databaseUsername --password=$this->databasePassword $this->databaseName < db.sql");
         }
