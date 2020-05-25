@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\Artisan;
 class DatabaseReset extends Command
 {
     protected $signature = 'db:reset
-                            {--F|force : Launch with no warning and no production protection}
-                            {--I|import : Import db.sql file located at root of your project}';
+                            {--force : Launch with no warning and no production protection}
+                            {--import : Import db.sql file located at root of your project}
+                            {--seed : Seed the database after reset and migrations}';
 
     protected $description = 'Import database & migrate';
 
@@ -28,7 +29,7 @@ class DatabaseReset extends Command
     public function handle()
     {
         $force = $this->option('force');
-        if ($force || ((env('APP_ENV') != 'prod') && (env('APP_ENV') != 'production'))) {
+        if ($force || (env('APP_ENV') != 'production')) {
             $this->warn('Your database will be reset and migrations launched.');
             $this->warn('Be careful, all recent data will be deleted!');
             if ($force || $this->confirm('Are you sure ?')) {
@@ -53,5 +54,11 @@ class DatabaseReset extends Command
         $this->info('Migrating database...');
         Artisan::call('migrate');
         $this->info(Artisan::output());
+        if ($this->option('seed')) {
+            $this->info('Seeding database...');
+            Artisan::call('db:seed');
+            $this->info(Artisan::output());
+        }
+
     }
 }

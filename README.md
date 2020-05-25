@@ -6,7 +6,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/suavy/database-reset-command-for-laravel.svg?style=flat-square)](https://packagist.org/packages/suavy/database-reset-command-for-laravel)
 [![StyleCI](https://github.styleci.io/repos/250306786/shield?branch=master)](https://github.styleci.io/repos/250306786)
 
-This package reset your database in few steps : dropping, creating, importing (optional), migrating.
+This package offer you a command that help you reset your database in few steps : dropping, creating, importing (optional), migrating, seeding (optional).
 
 ## Installation
 
@@ -28,9 +28,15 @@ Launch with no warning and no production protection
 php artisan db:reset --force
 ```
 #### --import
-Import db.sql file located at root of your project (be sure to not commit this file, add it to your .gitignore)
+Import db.sql file located at root of your project (__be sure to not commit this file, add it to your .gitignore__)
 ``` bash
 php artisan db:reset --import
+```
+
+#### --seed
+Launch seed at the end
+``` bash
+php artisan db:reset --seed
 ```
 
 ## Contributing
