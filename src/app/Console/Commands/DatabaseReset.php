@@ -59,6 +59,5 @@ class DatabaseReset extends Command
             Artisan::call('db:seed');
             $this->info(Artisan::output());
         }
-
     }
 }
